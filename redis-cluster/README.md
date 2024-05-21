@@ -5,3 +5,6 @@ In bridge mode, The following setting needs to be done and REDIS_CLUSTER_ANNOUNC
       - 'REDIS_CLUSTER_ANNOUNCE_IP=192.168.71.4'
       - 'REDIS_CLUSTER_ANNOUNCE_PORT=6384'
       - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16384'
+	  
+	 
+folder 3 works in host mode
