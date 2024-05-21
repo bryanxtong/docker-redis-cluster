@@ -7,4 +7,4 @@ In bridge mode, The following setting needs to be done and REDIS_CLUSTER_ANNOUNC
       - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16384'
 	  
 	 
-folder 3 works in host mode
+folder 3 provides another way for bridge
