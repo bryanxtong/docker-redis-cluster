@@ -15,12 +15,12 @@ import java.util.Arrays;
 public class ReactiveCommonPool {
 
     public static void main(String[] args) throws Exception {
-        RedisURI uri1 = RedisURI.Builder.redis("localhost", 7000).build();
-        RedisURI uri2 = RedisURI.Builder.redis("localhost", 7001).build();
-        RedisURI uri3 = RedisURI.Builder.redis("localhost", 7002).build();
-        RedisURI uri4 = RedisURI.Builder.redis("localhost", 7010).build();
-        RedisURI uri5 = RedisURI.Builder.redis("localhost", 7011).build();
-        RedisURI uri6 = RedisURI.Builder.redis("localhost", 7012).build();
+        jedisClusterNodes.add(new HostAndPort("localhost", 6379));
+        jedisClusterNodes.add(new HostAndPort("localhost", 6380));
+        jedisClusterNodes.add(new HostAndPort("localhost", 6381));
+        jedisClusterNodes.add(new HostAndPort("localhost", 6382));
+        jedisClusterNodes.add(new HostAndPort("localhost", 6383));
+        jedisClusterNodes.add(new HostAndPort("localhost", 6384));
         RedisClusterClient redisClient = RedisClusterClient.create(Arrays.asList(uri1, uri2, uri3, uri4, uri5, uri6));
         //redisClient.getPartitions();
         GenericObjectPool<StatefulRedisClusterConnection<String, String>> pool = ConnectionPoolSupport.createGenericObjectPool
