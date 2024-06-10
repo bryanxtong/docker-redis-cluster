@@ -1,0 +1,142 @@
+version: '3'
+services:
+  redis-node-0:
+    user: root
+    container_name: redis-node-0
+    image: docker.io/bitnami/redis-cluster:7.2
+    ports: 
+      - 6380:6380
+      - 16380:16380
+    volumes:
+      - ./redis_data-0:/bitnami/redis/data
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=redis-node-0:6380 redis-node-1:6381 redis-node-2:6382 redis-node-3:6383 redis-node-4:6384 redis-node-5:6385'
+      - 'REDIS_PORT_NUMBER=6380'
+      - 'REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE=hostname'
+      - 'REDIS_CLUSTER_ANNOUNCE_HOSTNAME=redis-node-0'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6380'
+      - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16380'
+    networks:
+      redis-cluster-network: 
+        ipv4_address: 172.20.0.2
+
+  redis-node-1:
+    user: root
+    container_name: redis-node-1
+    image: docker.io/bitnami/redis-cluster:7.2
+    ports: 
+      - 6381:6381
+      - 16381:16381
+    volumes:
+      - ./redis_data-1:/bitnami/redis/data
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=redis-node-0:6380 redis-node-1:6381 redis-node-2:6382 redis-node-3:6383 redis-node-4:6384 redis-node-5:6385'
+      - 'REDIS_PORT_NUMBER=6381'
+      - 'REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE=hostname'
+      - 'REDIS_CLUSTER_ANNOUNCE_HOSTNAME=redis-node-1'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6381'
+      - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16381'
+    networks:
+      redis-cluster-network: 
+        ipv4_address: 172.20.0.3
+
+  redis-node-2:
+    user: root
+    container_name: redis-node-2
+    image: docker.io/bitnami/redis-cluster:7.2
+    ports: 
+      - 6382:6382
+      - 16382:16382
+    volumes:
+      - ./redis_data-2:/bitnami/redis/data
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=redis-node-0:6380 redis-node-1:6381 redis-node-2:6382 redis-node-3:6383 redis-node-4:6384 redis-node-5:6385'
+      - 'REDIS_PORT_NUMBER=6382'
+      - 'REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE=hostname'
+      - 'REDIS_CLUSTER_ANNOUNCE_HOSTNAME=redis-node-2'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6382'
+      - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16382'
+    networks:
+      redis-cluster-network: 
+        ipv4_address: 172.20.0.4
+
+  redis-node-3:
+    user: root
+    container_name: redis-node-3
+    image: docker.io/bitnami/redis-cluster:7.2
+    ports: 
+      - 6383:6383
+      - 16383:16383
+    volumes:
+      - ./redis_data-3:/bitnami/redis/data
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=redis-node-0:6380 redis-node-1:6381 redis-node-2:6382 redis-node-3:6383 redis-node-4:6384 redis-node-5:6385'
+      - 'REDIS_PORT_NUMBER=6383'
+      - 'REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE=hostname'
+      - 'REDIS_CLUSTER_ANNOUNCE_HOSTNAME=redis-node-3'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6383'
+      - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16383'
+    networks:
+      redis-cluster-network: 
+        ipv4_address: 172.20.0.5
+
+  redis-node-4:
+    user: root
+    container_name: redis-node-4
+    image: docker.io/bitnami/redis-cluster:7.2
+    ports: 
+      - 6384:6384
+      - 16384:16384
+    volumes:
+      - ./redis_data-4:/bitnami/redis/data
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=redis-node-0:6380 redis-node-1:6381 redis-node-2:6382 redis-node-3:6383 redis-node-4:6384 redis-node-5:6385'
+      - 'REDIS_PORT_NUMBER=6384'
+      - 'REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE=hostname'
+      - 'REDIS_CLUSTER_ANNOUNCE_HOSTNAME=redis-node-4'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6384'
+      - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16384'
+    networks:
+      redis-cluster-network: 
+        ipv4_address: 172.20.0.6
+
+  redis-node-5:
+    user: root
+    container_name: redis-node-5
+    image: docker.io/bitnami/redis-cluster:7.2
+    ports: 
+      - 6385:6385
+      - 16385:16385
+    volumes:
+      - ./redis_data-5:/bitnami/redis/data
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_CLUSTER_REPLICAS=1'
+      - 'REDIS_NODES=redis-node-0:6380 redis-node-1:6381 redis-node-2:6382 redis-node-3:6383 redis-node-4:6384 redis-node-5:6385'
+      - 'REDIS_CLUSTER_CREATOR=yes'
+      - 'REDIS_PORT_NUMBER=6385'
+      - 'REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE=hostname'
+      - 'REDIS_CLUSTER_ANNOUNCE_HOSTNAME=redis-node-5'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6385'
+      - 'REDIS_CLUSTER_ANNOUNCE_BUS_PORT=16385'
+    networks:
+      redis-cluster-network: 
+        ipv4_address: 172.20.0.7
+  
+networks:
+  redis-cluster-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
